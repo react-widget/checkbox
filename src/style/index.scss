@@ -1,6 +1,6 @@
 $checkboxBorderRadius: 0;//3px
 
-.nex-checkbox {
+.rw-checkbox {
   white-space: nowrap;
   cursor: pointer;
   outline: none;
@@ -9,8 +9,8 @@ $checkboxBorderRadius: 0;//3px
   line-height: 1;
   vertical-align: middle;
 
-  &:hover .nex-checkbox-inner,
-  &-input:focus + .nex-checkbox-inner {
+  &:hover .rw-checkbox-inner,
+  &-input:focus + .rw-checkbox-inner {
     border-color: #3dbcf6;
   }
 
@@ -60,15 +60,15 @@ $checkboxBorderRadius: 0;//3px
 }
 
 /* 选中状态 */
-.nex-checkbox-checked {
+.rw-checkbox-checked {
 
   &:hover {
-    .nex-checkbox-inner {
+    .rw-checkbox-inner {
       border-color: #3dbcf6;
     }
   }
 
-  .nex-checkbox-inner {
+  .rw-checkbox-inner {
     border-color: #3dbcf6;
     background-color: #3dbcf6;
 
@@ -91,8 +91,8 @@ $checkboxBorderRadius: 0;//3px
 }
 
 /* 半选中状态 */
-.nex-checkbox-indeterminate {
-	.nex-checkbox-inner {
+.rw-checkbox-indeterminate {
+	.rw-checkbox-inner {
 		border-color: #3dbcf6;
     	background-color: #FFF;
 		&:after {
@@ -114,17 +114,17 @@ $checkboxBorderRadius: 0;//3px
 	}
 }
 
-.nex-checkbox-disabled {
+.rw-checkbox-disabled {
 
-  &.nex-checkbox-checked {
+  &.rw-checkbox-checked {
 
     &:hover {
-      .nex-checkbox-inner {
+      .rw-checkbox-inner {
         border-color: #d9d9d9;
       }
     }
 
-    .nex-checkbox-inner {
+    .rw-checkbox-inner {
       background-color: #f3f3f3;
       border-color: #d9d9d9;
 
@@ -135,12 +135,12 @@ $checkboxBorderRadius: 0;//3px
   }
 
   &:hover {
-    .nex-checkbox-inner {
+    .rw-checkbox-inner {
       border-color: #d9d9d9;
     }
   }
 
-  .nex-checkbox-inner {
+  .rw-checkbox-inner {
     border-color: #d9d9d9;
     background-color: #f3f3f3;
     &:after {
@@ -148,17 +148,17 @@ $checkboxBorderRadius: 0;//3px
     }
   }
 
-  .nex-checkbox-inner-input {
+  .rw-checkbox-inner-input {
     cursor: default;
   }
 }
 
-.nex-checkbox-wrapper {
+.rw-checkbox-wrapper {
 	cursor: pointer;
     font-size: 12px;
     display: inline-block;
 	vertical-align:middle;
-	.nex-checkbox-label {
+	.rw-checkbox-label {
 		transition: all .3s;
 		padding-left: 5px;
 		padding-right: 5px;
@@ -166,11 +166,11 @@ $checkboxBorderRadius: 0;//3px
 	}
 }
 
-.nex-checkbox-wrapper:not(:last-child) {
+.rw-checkbox-wrapper:not(:last-child) {
     margin-right: 8px;
 }
 
-.nex-checkbox-disabled+.nex-checkbox-label {
+.rw-checkbox-disabled+.rw-checkbox-label {
     color: rgba(0,0,0,.4);
     cursor: not-allowed;
 }

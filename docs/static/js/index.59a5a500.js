@@ -313,7 +313,7 @@ var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/run
 
 var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var _src = _interopRequireDefault(__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module '../../src'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+var _InnerCheckbox = _interopRequireDefault(__webpack_require__(/*! ../../src/InnerCheckbox */ "./src/InnerCheckbox.js"));
 
 var DEMO =
 /*#__PURE__*/
@@ -333,26 +333,53 @@ function (_Component) {
 
     _this = (0, _possibleConstructorReturn2.default)(this, (_getPrototypeOf2 = (0, _getPrototypeOf3.default)(DEMO)).call.apply(_getPrototypeOf2, [this].concat(args)));
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)((0, _assertThisInitialized2.default)(_this)), "state", {
-      value: 2
+      checked: true,
+      disabled: false
     });
-    (0, _defineProperty2.default)((0, _assertThisInitialized2.default)((0, _assertThisInitialized2.default)(_this)), "handleChange", function (value) {
+    (0, _defineProperty2.default)((0, _assertThisInitialized2.default)((0, _assertThisInitialized2.default)(_this)), "toggleChecked", function () {
       _this.setState({
-        value: value
+        checked: !_this.state.checked
       });
+    });
+    (0, _defineProperty2.default)((0, _assertThisInitialized2.default)((0, _assertThisInitialized2.default)(_this)), "toggleDisable", function () {
+      _this.setState({
+        disabled: !_this.state.disabled
+      });
+    });
+    (0, _defineProperty2.default)((0, _assertThisInitialized2.default)((0, _assertThisInitialized2.default)(_this)), "onChange", function (e) {
+      console.log('checked = ', e.target.checked);
 
-      console.log('changed ', value);
+      _this.setState({
+        checked: e.target.checked
+      });
     });
-    (0, _defineProperty2.default)((0, _assertThisInitialized2.default)((0, _assertThisInitialized2.default)(_this)), "handleChange2", function (value) {
-      console.log('changed ', value);
-    });
-    (0, _defineProperty2.default)((0, _assertThisInitialized2.default)((0, _assertThisInitialized2.default)(_this)), "filterMsg", '');
     return _this;
   }
 
   (0, _createClass2.default)(DEMO, [{
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", null);
+      var label = "".concat(this.state.checked ? 'Checked' : 'Unchecked', "-").concat(this.state.disabled ? 'Disabled' : 'Enabled');
+      return _react.default.createElement("div", null, _react.default.createElement("p", {
+        style: {
+          marginBottom: '20px'
+        }
+      }, _react.default.createElement(_InnerCheckbox.default, {
+        checked: this.state.checked,
+        disabled: this.state.disabled,
+        onChange: this.onChange
+      }), "-", _react.default.createElement(_InnerCheckbox.default, {
+        checked: this.state.checked,
+        onChange: this.onChange,
+        indeterminate: true
+      })), _react.default.createElement("p", null, _react.default.createElement("button", {
+        onClick: this.toggleChecked
+      }, !this.state.checked ? 'Check' : 'Uncheck'), _react.default.createElement("button", {
+        style: {
+          marginLeft: '10px'
+        },
+        onClick: this.toggleDisable
+      }, !this.state.disabled ? 'Disable' : 'Enable')));
     }
   }]);
   return DEMO;
@@ -412,6 +439,200 @@ _reactDom.default.render(_react.default.createElement(_Demo.default, null), demo
 
 /***/ }),
 
+/***/ "./src/InnerCheckbox.js":
+/*!******************************!*\
+  !*** ./src/InnerCheckbox.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireWildcard = __webpack_require__(/*! @babel/runtime-corejs2/helpers/interopRequireWildcard */ "./node_modules/@babel/runtime-corejs2/helpers/interopRequireWildcard.js");
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime-corejs2/helpers/interopRequireDefault */ "./node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/extends */ "./node_modules/@babel/runtime-corejs2/helpers/extends.js"));
+
+var _keys = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/objectWithoutProperties */ "./node_modules/@babel/runtime-corejs2/helpers/objectWithoutProperties.js"));
+
+var _objectSpread2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/objectSpread.js"));
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/classCallCheck */ "./node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js"));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/createClass */ "./node_modules/@babel/runtime-corejs2/helpers/createClass.js"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/possibleConstructorReturn */ "./node_modules/@babel/runtime-corejs2/helpers/possibleConstructorReturn.js"));
+
+var _getPrototypeOf3 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/getPrototypeOf */ "./node_modules/@babel/runtime-corejs2/helpers/getPrototypeOf.js"));
+
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/inherits */ "./node_modules/@babel/runtime-corejs2/helpers/inherits.js"));
+
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/assertThisInitialized */ "./node_modules/@babel/runtime-corejs2/helpers/assertThisInitialized.js"));
+
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/defineProperty.js"));
+
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
+
+var _classnames = _interopRequireDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
+
+function noop() {}
+
+var Checkbox =
+/*#__PURE__*/
+function (_PureComponent) {
+  (0, _inherits2.default)(Checkbox, _PureComponent);
+
+  function Checkbox() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    (0, _classCallCheck2.default)(this, Checkbox);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = (0, _possibleConstructorReturn2.default)(this, (_getPrototypeOf2 = (0, _getPrototypeOf3.default)(Checkbox)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    (0, _defineProperty2.default)((0, _assertThisInitialized2.default)((0, _assertThisInitialized2.default)(_this)), "state", {
+      checked: 'checked' in _this.props ? _this.props.checked : _this.props.defaultChecked
+    });
+    (0, _defineProperty2.default)((0, _assertThisInitialized2.default)((0, _assertThisInitialized2.default)(_this)), "handleChange", function (e) {
+      var _assertThisInitialize = (0, _assertThisInitialized2.default)((0, _assertThisInitialized2.default)(_this)),
+          props = _assertThisInitialize.props;
+
+      if (props.disabled) {
+        return;
+      }
+
+      if (!('checked' in props)) {
+        _this.setState({
+          checked: e.target.checked
+        });
+      }
+
+      props.onChange({
+        target: (0, _objectSpread2.default)({}, props, {
+          checked: e.target.checked
+        }),
+        stopPropagation: function stopPropagation() {
+          e.stopPropagation();
+        },
+        preventDefault: function preventDefault() {
+          e.preventDefault();
+        }
+      });
+    });
+    return _this;
+  }
+
+  (0, _createClass2.default)(Checkbox, [{
+    key: "render",
+    value: function render() {
+      var _classNames;
+
+      var _this$props = this.props,
+          prefixCls = _this$props.prefixCls,
+          className = _this$props.className,
+          style = _this$props.style,
+          name = _this$props.name,
+          type = _this$props.type,
+          disabled = _this$props.disabled,
+          readOnly = _this$props.readOnly,
+          tabIndex = _this$props.tabIndex,
+          onClick = _this$props.onClick,
+          onFocus = _this$props.onFocus,
+          onBlur = _this$props.onBlur,
+          indeterminate = _this$props.indeterminate,
+          others = (0, _objectWithoutProperties2.default)(_this$props, ["prefixCls", "className", "style", "name", "type", "disabled", "readOnly", "tabIndex", "onClick", "onFocus", "onBlur", "indeterminate"]);
+      var checked = this.state.checked;
+      var globalProps = (0, _keys.default)(others).reduce(function (prev, key) {
+        if (key.substr(0, 5) === 'aria-' || key.substr(0, 5) === 'data-' || key === 'role') {
+          prev[key] = others[key];
+        }
+
+        return prev;
+      }, {});
+      var classString = (0, _classnames.default)(prefixCls, className, (_classNames = {}, (0, _defineProperty2.default)(_classNames, "".concat(prefixCls, "-checked"), checked), (0, _defineProperty2.default)(_classNames, "".concat(prefixCls, "-indeterminate"), indeterminate), (0, _defineProperty2.default)(_classNames, "".concat(prefixCls, "-disabled"), disabled), _classNames));
+      return _react.default.createElement("span", {
+        className: classString,
+        style: style
+      }, _react.default.createElement("input", (0, _extends2.default)({
+        name: name,
+        type: type,
+        readOnly: readOnly,
+        disabled: disabled,
+        tabIndex: tabIndex,
+        className: "".concat(prefixCls, "-input"),
+        checked: !!checked,
+        onClick: onClick,
+        onFocus: onFocus,
+        onBlur: onBlur,
+        onChange: this.handleChange
+      }, globalProps)), _react.default.createElement("span", {
+        className: "".concat(prefixCls, "-inner")
+      }));
+    }
+  }], [{
+    key: "getDerivedStateFromProps",
+    value: function getDerivedStateFromProps(props, state) {
+      var newState = {};
+
+      if ('checked' in props) {
+        newState.checked = props.checked;
+      }
+
+      return newState;
+    }
+  }]);
+  return Checkbox;
+}(_react.PureComponent);
+
+exports.default = Checkbox;
+(0, _defineProperty2.default)(Checkbox, "propTypes", {
+  prefixCls: _propTypes.default.string,
+  className: _propTypes.default.string,
+  style: _propTypes.default.object,
+  name: _propTypes.default.string,
+  type: _propTypes.default.string,
+  defaultChecked: _propTypes.default.oneOfType([_propTypes.default.number, _propTypes.default.bool]),
+  checked: _propTypes.default.oneOfType([_propTypes.default.number, _propTypes.default.bool]),
+  disabled: _propTypes.default.bool,
+  onFocus: _propTypes.default.func,
+  onBlur: _propTypes.default.func,
+  onChange: _propTypes.default.func,
+  onClick: _propTypes.default.func,
+  tabIndex: _propTypes.default.string,
+  readOnly: _propTypes.default.bool,
+  indeterminate: _propTypes.default.bool
+});
+(0, _defineProperty2.default)(Checkbox, "defaultProps", {
+  prefixCls: 'rw-checkbox',
+  className: '',
+  style: {},
+  type: 'checkbox',
+  defaultChecked: false,
+  onFocus: noop,
+  onBlur: noop,
+  onChange: noop // onFocus() { },
+  // onBlur() { },
+  // onChange() { },
+
+});
+
+/***/ }),
+
 /***/ "./src/style/index.scss":
 /*!******************************!*\
   !*** ./src/style/index.scss ***!
@@ -430,12 +651,12 @@ _reactDom.default.render(_react.default.createElement(_Demo.default, null), demo
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\wamp\www\github-projects\react-widget\checkbox\node_modules\packez\lib\fetchPolyfills.js */"./node_modules/packez/lib/fetchPolyfills.js");
-__webpack_require__(/*! D:\wamp\www\github-projects\react-widget\checkbox\node_modules\packez\lib\polyfills.js */"./node_modules/packez/lib/polyfills.js");
-module.exports = __webpack_require__(/*! D:\wamp\www\github-projects\react-widget\checkbox\examples\index.js */"./examples/index.js");
+__webpack_require__(/*! D:\wamp64\www\github-project\react-widget\checkbox\node_modules\packez\lib\fetchPolyfills.js */"./node_modules/packez/lib/fetchPolyfills.js");
+__webpack_require__(/*! D:\wamp64\www\github-project\react-widget\checkbox\node_modules\packez\lib\polyfills.js */"./node_modules/packez/lib/polyfills.js");
+module.exports = __webpack_require__(/*! D:\wamp64\www\github-project\react-widget\checkbox\examples\index.js */"./examples/index.js");
 
 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=index.7bd06bf3.js.map
+//# sourceMappingURL=index.59a5a500.js.map

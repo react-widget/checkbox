@@ -1,34 +1,63 @@
 import React, { Component } from 'react';
-import Checkbox from '../../src';
+import Checkbox from '../../src/InnerCheckbox';
 
 
 
 export default class DEMO extends Component {
 
     state = {
-        value: 2
+        checked: true,
+        disabled: false,
+    };
+
+
+    toggleChecked = () => {
+        this.setState({ checked: !this.state.checked });
     }
-
-
-    handleChange = (value) => {
+    toggleDisable = () => {
+        this.setState({ disabled: !this.state.disabled });
+    }
+    onChange = (e) => {
+        console.log('checked = ', e.target.checked);
         this.setState({
-            value
-        })
-
-        console.log('changed ', value)
+            checked: e.target.checked,
+        });
     }
-
-    handleChange2 = (value) => {
-        console.log('changed ', value)
-    }
-
-    filterMsg = ''
 
     render() {
-
+        const label = `${this.state.checked ? 'Checked' : 'Unchecked'}-${this.state.disabled ? 'Disabled' : 'Enabled'}`;
         return (
             <div>
+                <p style={{ marginBottom: '20px' }}>
+                    <Checkbox
+                        checked={this.state.checked}
+                        disabled={this.state.disabled}
+                        onChange={this.onChange}
+                    >
+                    </Checkbox>
 
+                    -
+
+                    <Checkbox
+                        checked={this.state.checked}
+                        onChange={this.onChange}
+                        indeterminate
+                    >
+                    </Checkbox>
+                </p>
+                <p>
+                    <button
+                        onClick={this.toggleChecked}
+                    >
+                        {!this.state.checked ? 'Check' : 'Uncheck'}
+                    </button>
+                    <button
+                        style={{ marginLeft: '10px' }}
+                        onClick={this.toggleDisable}
+                    >
+                        {!this.state.disabled ? 'Disable' : 'Enable'}
+                    </button>
+                </p>
             </div >
         );
     }
