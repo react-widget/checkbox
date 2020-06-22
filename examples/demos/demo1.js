@@ -1,65 +1,44 @@
-import React, { Component } from 'react';
-import Checkbox from '../../src/InnerCheckbox';
-
-
+import React, { Component } from "react";
+import { RWCheckbox } from "../../src/RWCheckbox";
+import { Checkbox } from "../../src/Checkbox";
+import { CheckboxGroup } from "../../src/CheckboxGroup";
 
 export default class DEMO extends Component {
-
-    state = {
-        checked: true,
-        disabled: false,
-    };
-
-
-    toggleChecked = () => {
-        this.setState({ checked: !this.state.checked });
-    }
-    toggleDisable = () => {
-        this.setState({ disabled: !this.state.disabled });
-    }
-    onChange = (e) => {
-        console.log('checked = ', e.target.checked);
-        this.setState({
-            checked: e.target.checked,
-        });
-    }
-
-    render() {
-        const label = `${this.state.checked ? 'Checked' : 'Unchecked'}-${this.state.disabled ? 'Disabled' : 'Enabled'}`;
-        return (
-            <div>
-                <p style={{ marginBottom: '20px' }}>
-                    <Checkbox
-                        checked={this.state.checked}
-                        disabled={this.state.disabled}
-                        onChange={this.onChange}
-                    >
-                    </Checkbox>
-
-                    -
-
-                    <Checkbox
-                        checked={this.state.checked}
-                        onChange={this.onChange}
-                        indeterminate
-                    >
-                    </Checkbox>
-                </p>
-                <p>
-                    <button
-                        onClick={this.toggleChecked}
-                    >
-                        {!this.state.checked ? 'Check' : 'Uncheck'}
-                    </button>
-                    <button
-                        style={{ marginLeft: '10px' }}
-                        onClick={this.toggleDisable}
-                    >
-                        {!this.state.disabled ? 'Disable' : 'Enable'}
-                    </button>
-                </p>
-            </div >
-        );
-    }
-
+	render() {
+		return (
+			<div>
+				<input type="checkbox" />
+				<RWCheckbox onChange={(e) => console.log(e.target.checked)} />{" "}
+				<RWCheckbox checked /> <RWCheckbox disabled checked /> <RWCheckbox indeterminate />{" "}
+				<RWCheckbox disabled indeterminate />{" "}
+				<Checkbox style={{ width: 100 }} defaultChecked>
+					CheckobzCheckobzCheckobz
+				</Checkbox>
+				<Checkbox style={{ width: 100 }} checked>
+					CheckobzCheckobzCheckobz
+				</Checkbox>
+				<Checkbox checked disabled>
+					checked disabled
+				</Checkbox>
+				<Checkbox indeterminate>indeterminate</Checkbox>
+				<Checkbox indeterminate disabled>
+					indeterminate disabled
+				</Checkbox>
+				<CheckboxGroup
+					defaultValue={["A", "D"]}
+					onChange={(v) => console.log("group changed:", v)}
+				>
+					<Checkbox value="A">A</Checkbox>
+					<Checkbox value="B">B</Checkbox>
+					<Checkbox value="C">C</Checkbox>
+					<Checkbox value="D">D</Checkbox>
+					<Checkbox value="E">E</Checkbox>
+				</CheckboxGroup>
+				<CheckboxGroup
+					defaultValue={["A", "D"]}
+					options={["A", "B", "C", "D", "E", "F"]}
+				></CheckboxGroup>
+			</div>
+		);
+	}
 }
