@@ -229,7 +229,8 @@ export interface CheckboxGroupContextValue {
 	height: 8px;
 	background-color: #1890ff;
 	border: 0;
-	transform: translate(-50%, -50%) scale(1);
+	border-radius: 1px;
+	transform: translate(-4px, -4px) scale(1);
 	opacity: 1;
 	content: " ";
 }
@@ -263,7 +264,6 @@ export interface CheckboxGroupContextValue {
 	color: rgba(0, 0, 0, 0.25);
 	cursor: not-allowed;
 }
-
 
 
 ```
