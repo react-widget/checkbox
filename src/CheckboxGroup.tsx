@@ -3,6 +3,11 @@ import classNames from "classnames";
 import CheckboxGroupContext from "./CheckboxGroupContext";
 import Checkbox from "./Checkbox";
 
+export interface RenderProps<T = any> {
+	value: T | undefined;
+	onChange: (value: T) => void;
+}
+
 export interface CheckboxOption<T = any> {
 	value: T;
 	label: React.ReactNode;
@@ -18,13 +23,14 @@ export interface CheckboxGroupProps<T = any>
 		React.HTMLAttributes<HTMLDivElement>,
 		"defaultValue" | "onChange" | "defaultChecked"
 	> {
-	prefixCls: string;
+	prefixCls?: string;
 	name?: string;
 	defaultValue?: T[];
 	value?: T[];
 	disabled?: boolean;
 	readOnly?: boolean;
 	options?: T extends string | number ? (string | number)[] : CheckboxOption<T>[];
+	render?: (props: RenderProps) => React.ReactNode;
 	onChange?: (checkedValue: T[]) => void;
 }
 
@@ -86,6 +92,10 @@ export class CheckboxGroup<T = any> extends React.Component<
 			value.splice(idx, 1);
 		}
 
+		this.handleChange(value);
+	};
+
+	handleChange = (value: T[]) => {
 		if (this.props.value === undefined) {
 			this.setState({ value });
 		}
@@ -104,6 +114,7 @@ export class CheckboxGroup<T = any> extends React.Component<
 			disabled,
 			readOnly,
 			options,
+			render,
 			...restProps
 		} = this.props;
 		const state = this.state;
@@ -130,9 +141,16 @@ export class CheckboxGroup<T = any> extends React.Component<
 
 		return (
 			<CheckboxGroupContext.Provider value={this.getGroupContext()}>
-				<div {...restProps} className={cls}>
-					{children}
-				</div>
+				{render ? (
+					render({
+						value: state.value,
+						onChange: this.handleChange,
+					})
+				) : (
+					<div {...restProps} className={cls}>
+						{children}
+					</div>
+				)}
 			</CheckboxGroupContext.Provider>
 		);
 	}

@@ -65,7 +65,6 @@ export const Checkbox: React.FC<CheckboxProps> & { Group: typeof CheckboxGroup }
 		>
 			<RWCheckbox
 				{...restProps}
-				type="checkbox"
 				name={name}
 				checked={checked}
 				onChange={handleChange}
