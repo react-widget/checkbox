@@ -5,7 +5,7 @@ import { RWCheckbox, RWCheckboxProps } from "./RWCheckbox";
 import { CheckboxGroup } from "./CheckboxGroup";
 
 export interface CheckboxProps
-	extends Omit<RWCheckboxProps, "onChange" | "onMouseEnter" | "onMouseLeave"> {
+	extends Omit<RWCheckboxProps, "onChange" | "onMouseEnter" | "onMouseLeave" | "type"> {
 	name?: string;
 	value?: any;
 	onChange?: (checked: boolean, e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -65,6 +65,7 @@ export const Checkbox: React.FC<CheckboxProps> & { Group: typeof CheckboxGroup }
 		>
 			<RWCheckbox
 				{...restProps}
+				type="checkbox"
 				name={name}
 				checked={checked}
 				onChange={handleChange}

@@ -2,6 +2,7 @@ import React from "react";
 import classNames from "classnames";
 
 export interface RWCheckboxProps extends React.HTMLAttributes<HTMLInputElement> {
+	type: "checkbox" | "radio";
 	prefixCls: string;
 	className?: string;
 	name?: string;
@@ -10,6 +11,7 @@ export interface RWCheckboxProps extends React.HTMLAttributes<HTMLInputElement> 
 	disabled?: boolean;
 	readOnly?: boolean;
 	indeterminate?: boolean;
+	inputRef?: React.RefObject<HTMLInputElement>;
 }
 
 export interface RWCheckboxState {
@@ -17,9 +19,10 @@ export interface RWCheckboxState {
 }
 
 export class RWCheckbox extends React.Component<RWCheckboxProps, RWCheckboxState> {
-	static defaultProps = {
+	static defaultProps: RWCheckboxProps = {
 		prefixCls: "rw-checkbox",
 		defaultChecked: false,
+		type: "checkbox",
 	};
 
 	static getDerivedStateFromProps(props: RWCheckboxProps, state: RWCheckboxState) {
@@ -57,6 +60,8 @@ export class RWCheckbox extends React.Component<RWCheckboxProps, RWCheckboxState
 			disabled,
 			readOnly,
 			indeterminate,
+			type,
+			inputRef,
 			...restProps
 		} = this.props;
 		let { checked } = this.state;
@@ -75,9 +80,10 @@ export class RWCheckbox extends React.Component<RWCheckboxProps, RWCheckboxState
 			<span className={classString} style={style}>
 				<input
 					{...restProps}
+					ref={inputRef}
 					className={inputClassString}
 					name={name}
-					type="checkbox"
+					type={type}
 					readOnly={readOnly}
 					disabled={disabled}
 					checked={!!checked}
